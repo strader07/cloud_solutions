@@ -8,12 +8,14 @@
 Shows how to create and configure mysql server in a linux instance. <br/>
 It covers installing mysql server, configuring database and tables in an linux instance itself and accessing cloud managed mysql databases.
 
-## MySQL in AWS EC2 instance (Ubuntu 18.04)
+## MySQL in AWS EC2 linux instance (Ubuntu 18.04)
+
 
 ### Pre-configuration
 
 1. Create and launch an EC2 instance in AWS console ([reference](https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LaunchInstanceWizard:))
 2. SSH login to the instance
+
 
 ### Setup mysql server
 
@@ -35,15 +37,12 @@ It covers installing mysql server, configuring database and tables in an linux i
    ```sh
    sudo mysql_secure_installation
    ```
-   <img src="https://i.imgur.com/SGvS339.jpg"></img>
-   
-   Press y on this prompt, then choose your password level following instructions.
-   
-   Give a root password and continue, hit y for 'remove anonymous users?'.
-   
-   Recommend hitting y for 'Disallow root login remotely?' to protect anyone guessing the root password.
-   
-   Hit y for 'Remove test database and access to it?' and 'Reload privilege tables now?'.
+   <img src="https://i.imgur.com/SGvS339.jpg"></img><br/>
+   Press y on this prompt, then choose your password level following instructions.<br/>
+   Give a root password and continue, hit y for 'remove anonymous users?'.<br/>
+   Recommend hitting y for 'Disallow root login remotely?' to protect anyone guessing the root password.<br/>
+   Hit y for 'Remove test database and access to it?' and 'Reload privilege tables now?'.<br/>
+
 
 ### Configure root to use MySQL shell
 
@@ -60,9 +59,9 @@ It covers installing mysql server, configuring database and tables in an linux i
    <img src="https://i.imgur.com/ZATsYQ0.jpg"></img>
 3. Change root auth method
    ```sql
-   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Followme1!';
+   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Layerstack1!';
    ```
-   Note: The password string ('Followme1!' in command) must meet the policies depending on the chosed level of strength in step 4 in setup section.<br/>
+   Note: The password string ('Layerstack1!' in command) must meet the policies depending on the chosed level of strength in step 4 in setup section.<br/>
    Remind:<br/>
    <strong>LOW</strong> Length >= 8 characters.<br/>
    <strong>MEDIUM</strong> Length >= 8, numeric, mixed case, and special characters.<br/>
@@ -82,6 +81,7 @@ It covers installing mysql server, configuring database and tables in an linux i
    exit
    ```
 
+
 ### Running & Stopping MySQL service
 
 1. Check the status
@@ -95,9 +95,58 @@ It covers installing mysql server, configuring database and tables in an linux i
    sudo systemctl start mysql
    ```
 3. Stop the service
-
    ```sh
    sudo systemctl stop mysql
    ```
 
+
 ### Working with MySQL users, databses, and tables from shell
+
+1. Login to mysql shell with root user
+   ```sh
+   mysql -u root -p
+   ```
+2. Create a new user - sql command
+   ```sql
+   CREATE USER 'new_user'@'localhost' IDENTIFIED BY 'new_password';
+   ```
+   Note: replace 'new_user' and 'new_password' with your own
+3. Create a new database, a table, loading db and table info
+   ```sql
+   CREATE DATABASE testdb; // creates a database named 'testdb'
+   SHOW DATABASES; // shows all the databases
+   USE testdb; // selects the database 'testdb' as the current database
+   SELECT DATABASE(); // shows which database is selected currently
+   
+   CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE); // creates a table 'pets' within the selected db
+   SHOW TABLES; // shows tables in the current db
+   DESCRIBE pets; // shows table info
+   ```
+4. Granting a user permissions on MySQL
+   ```sql
+   GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'localhost';
+   ```
+   Syntax: [GRANT/REVOKE] [permission] [db_name].[table_name] TO [user]@[db_host] (PRIVILEGES is an optional parameter)<br/>
+   Action: It gives/revokes a user on 'db_host' a specific permission on a database 'db_name' table 'table_name'<br/>
+   A list of permission:<br/>
+    <strong>ALL</strong> – Allow complete access to a specific database. If a database is not specified, then allow complete access to the entirety of MySQL.<br/>
+    <strong>CREATE</strong> – Allow a user to create databases and tables.<br/>
+    <strong>DELETE</strong> – Allow a user to delete rows from a table.<br/>
+    <strong>DROP</strong> – Allow a user to drop databases and tables.<br/>
+    <strong>EXECUTE</strong> – Allow a user to execute stored routines.<br/>
+    <strong>GRANT OPTION</strong> – Allow a user to grant or remove another user’s privileges.<br/>
+    <strong>INSERT</strong> – Allow a user to insert rows from a table.<br/>
+    <strong>SELECT</strong> – Allow a user to select data from a database.<br/>
+    <strong>SHOW DATABASES</strong> - Allow a user to view a list of all databases.<br/>
+    <strong>UPDATE</strong> – Allow a user to update rows in a table.<br/>
+5. Grand the changes
+   ```sql
+   FLUSH PRIVILEGES;
+   ```
+6. Exit the sql shell
+   ```sql
+   exit;
+   ```
+
+
+## Working with AWS managed RDS (Relational Database Service)
