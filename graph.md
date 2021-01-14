@@ -76,7 +76,11 @@ It covers installing Neo4j, configuring databases in a linux instance and access
    ```
 3. Install Neo4j community edition
    ```sh
+   # community edition
    sudo apt install neo4j=1:4.2.2
+   
+   # enterprise edition
+   sudo apt install neo4j-enterprise=1:4.2.2
    ```
 
 ### Run Neo4j community edition
@@ -90,6 +94,8 @@ It covers installing Neo4j, configuring databases in a linux instance and access
 2. Start Neo4j
    ```sh
    sudo systemctl start neo4j
+   # or restart with
+   sudo systemctl restart neo4j
    ```
 3. Stop noe4j
    ```sh
@@ -103,40 +109,82 @@ It covers installing Neo4j, configuring databases in a linux instance and access
 4. Edit Neo4j database configurations
    ```sh
    sudo nano /etc/neo4j/neo4j.conf
-   # after editing the configuration file, restart the service
+   ```
+   Add or uncomment following lines for your first configuration.
+   ```
+   dbms.default_listen_address=0.0.0.0
+   dbms.connector.bolt.listen_address=:7687
+   dbms.connector.http.listen_address=:7474
+   ```
+   Exit nano editor hit "ctrl + x" and "enter" to save the changes.<br/>
+   After editing the configuration file, restart the service to invoke the changes.
+   ```
    sudo systemctl restart neo4j
    ```
 
 
-### Working with Neo4j from shell
+### Working with Neo4j from cypher-shell
+cypher-shell is installed along with neo4j installation.<br/>
 
-1. Connect with Neo4j
+1. Login to the server (cypher-shell)
    ```sh
-   mongo # connects with local mongodb, default port is 27017
-   mongo --port 28015 # connects with mongo on a specific port
-   mongo --host mongodb0.example.com --port 28015 # connects with remote mongodb server
-   mongo --username alice --password --authenticationDatabase admin --host mongodb0.examples.com --port 28015 # connect with remote mongodb with authentication
+   # initial username and passowrd - 'neo4j', 'neo4j'
+   sudo cypher-shell -u neo4j -p neo4j
    ```
-2. Working with ```mongo``` Shell<br/>
-   To display the database you are using,
-   ```mongo
-   db
+   Set up a new password on prompt.<br/>
+   
+   Or login using a web browser - [http://52.88.242.226:7474/browser](http://52.88.242.226:7474/browser)<br/>
+   Or if you are setting neo4j in local - [http://localhost:7474/browser](http://localhost:7474/browser)
+   
+2. Working with ```cypher-shell``` query<br/>
+   Note: all cypher-shell queries come with semi-colon.<br/>
+
+   To display all the databases,
+   ```cypher-shell
+   # individual database
+   SHOW DATABASE neo4j;
+   
+   # all databases
+   SHOW DATABASES;
    ```
-   To create or switch databases,
-   ```mongo
-   use mydb
+   By default, we have following two databases.<br/>
+   <img src="https://i.imgur.com/ge7PAEu.jpg"></img><br/>
+   
+   Additional commands for database show<br/>
+   ```cypher-shell
+   SHOW DEFAULT DATABASE;
    ```
-   To insert documents in a database, this also creates a database if no such database exists
-   ```mongo
-   db.mydb.insert({"name":"Bill", "email":"bill@email.com"})
+
+   To create databases,
+   ```cypher-shell
+   # This only works with neo4j enterprise edition
+   CREATE DATABASE sales;
+   SHOW DATABASES;
    ```
-   To check database lists,
-   ```mongo
-   show dbs
+   To switch a database,
+   ```cypher-shell
+   :use sales
+   ```
+   To create or replace a database,
+   ```cypher-shell
+   CREATE OR REPLACE DATABASE sales;
+   ```
+   To retreive records,
+   ```cypher-shell
+   match (n) return count(n) as countNode;
+   ```
+   To start and stop a database,
+   ```cypher-shell
+   STOP DATABASE sales;
+   START DATABASE sales;
+   ```
+   To remove a database,
+   ```cypher-shell
+   DROP DATABASE sales;
    ```
 <br/>
 
-## Working with AWS managed NoSQL DynamoDB
+## Working with AWS managed Graph Neptune
 
 ### Pre-requests and environment setup
 
@@ -152,7 +200,7 @@ It covers installing Neo4j, configuring databases in a linux instance and access
    <img src="https://i.imgur.com/DPpag3q.jpg"></img>
    Enter access key id and secret key, region where your RDS instance will be located, output format as json.<br/>
 
-### Create a DynamoDB table using aws cli
+### Create a Neptune Database instance using aws cli
 
    ```sh
    aws dynamodb create-table \
