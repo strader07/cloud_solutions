@@ -3,12 +3,36 @@
   <h2 align="center">Working with MySQL in Linux</h2>
 </p>
 
-### Description
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#description">Description</a>
+    </li>
+    <li>
+      <a href="#working-with-mysql-server-in-linux-instance">Working with MySQL server in linux instance</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
+
+## Description
 
 Shows how to create and configure mysql server in a linux instance. <br/>
 It covers installing mysql server, configuring database and tables in an linux instance itself and accessing cloud managed mysql databases.
 
-## MySQL in AWS EC2 linux instance (Ubuntu 18.04)
+## Working with MySQL server in linux instance
 
 
 ### Pre-configuration
