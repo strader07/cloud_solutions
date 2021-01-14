@@ -81,7 +81,7 @@ It covers installing Neo4j, configuring databases in a linux instance and access
 
 ### Run Neo4j community edition
 
-1. Verify MongoDB running status
+1. Verify Neoj4 running status
    ```sh
    sudo systemctl status neo4j
    ```
