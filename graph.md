@@ -18,17 +18,17 @@
       <a href="#working-with-mongodb-community-edition-in-ec2">Working with MongoDB Community Edition in EC2</a>
       <ul>
         <li><a href="#pre-requests">Pre requests</a></li>
-        <li><a href="#install-mongodb-community-edition">Install MongoDB Community Edition</a></li>
-        <li><a href="#run-mongodb-community-edition">Run MongoDB Community Edition</a></li>
-        <li><a href="#working-with-mongodb-from-shell">Working with MongoDB from shell</a></li>
+        <li><a href="#install-neo4j">Install Neo4j</a></li>
+        <li><a href="#run-neo4j-community-edition">Run Neo4j community edition</a></li>
+        <li><a href="#working-with-neo4j-from-cypher-shell">Working with Neo4j from cypher-shell</a></li>
       </ul>
     </li>
     <li>
-      <a href="#working-with-aws-managed-nosql-dynamodb">Working with AWS managed NoSQL DynamoDB</a>
+      <a href="#working-with-aws-managed-graph-neptune">Working with AWS managed Graph Neptune</a>
       <ul>
         <li><a href="#pre-requests-and-environment-setup">Pre-requests and environment setup</a></li>
-        <li><a href="#create-a-dynamodb-table-using-aws-cli">Create a DynamoDB table using aws cli</a></li>
-        <li><a href="#working-with-dynamodb">Working with DynamoDB</a></li>
+        <li><a href="#create-a-neptune-database-instance-using-aws-cli">Create a Neptune Database instance using aws cli</a></li>
+        <li><a href="#working-with-neptune">Working with Neptune</a></li>
       </ul>
     </li>
   </ol>
@@ -202,77 +202,6 @@ cypher-shell is installed along with neo4j installation.<br/>
 
 ### Create a Neptune Database instance using aws cli
 
-   ```sh
-   aws dynamodb create-table \
-    --table-name MusicCollection \
-    --attribute-definitions AttributeName=Artist,AttributeType=S AttributeName=SongTitle,AttributeType=S \
-    --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
-    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
-   ```
-   Expected output:
-   ```json
-    {
-        "TableDescription": {
-            "AttributeDefinitions": [
-                {
-                    "AttributeName": "Artist",
-                    "AttributeType": "S"
-                },
-                {
-                    "AttributeName": "SongTitle",
-                    "AttributeType": "S"
-                }
-            ],
-            "TableName": "MusicCollection",
-            "KeySchema": [
-                {
-                    "AttributeName": "Artist",
-                    "KeyType": "HASH"
-                },
-                {
-                    "AttributeName": "SongTitle",
-                    "KeyType": "RANGE"
-                }
-            ],
-            "TableStatus": "CREATING",
-            "CreationDateTime": 1610587688.742,
-            "ProvisionedThroughput": {
-                "NumberOfDecreasesToday": 0,
-                "ReadCapacityUnits": 1,
-                "WriteCapacityUnits": 1
-            },
-            "TableSizeBytes": 0,
-            "ItemCount": 0,
-            "TableArn": "arn:aws:dynamodb:us-west-2:867719205611:table/MusicCollection",
-            "TableId": "e790f02e-b0b6-4fe8-ac63-ee3c31980dc0"
-        }
-    }
-   ```
-
-### Working with DynamoDB
-
-1. Put item into a DynamoDB table
-   ```sh
-   aws dynamodb put-item \
-    --table-name MusicCollection \
-    --item '{
-        "Artist": {"S": "No One You Know"},
-        "SongTitle": {"S": "Call Me Today"} ,
-        "AlbumTitle": {"S": "Somewhat Famous"} 
-      }' \
-    --return-consumed-capacity TOTAL
-   ```
-   Response from AWS:
-   ```json
-   {
-       "ConsumedCapacity": {
-           "TableName": "MusicCollection",
-           "CapacityUnits": 1.0
-       }
-   }
-   ```
-2. Verify tables in AWS console
-   * [DynamoDB tables](https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#tables)
-   * [Items in a table](https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#table?name=MusicCollection&initialTableGroup=%23all)
+### Working with Neptune
 
 Lets try out!
