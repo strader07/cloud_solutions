@@ -147,6 +147,41 @@ It covers installing mysql server, configuring database and tables in an linux i
    ```sql
    exit;
    ```
-
+<br/>
 
 ## Working with AWS managed RDS (Relational Database Service)
+
+### Pre-requests and environment setup
+
+1. Install aws-cli in your linux instance
+   ```sh
+   sudo apt update
+   sudo apt install awscli -y
+   ```
+2. Configure aws IAM user credentials assuming you created an IAM user and granted RDS access permission ([reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console))
+   ```sh
+   aws configure
+   ```
+   <img src="https://i.imgur.com/DPpag3q.jpg"></img>
+   Enter access key id and secret key, region where your RDS instance will be located, output format as json.<br/>
+
+### Create a RDS database instance using aws cli
+
+   ```sh
+   aws rds create-db-instance --engine mysql --engine-version 8.0.20 --db-instance-identifier testmysqldbinstance --allocated-storage 20 --db-instance-class db.t2.micro --master-username admin --master-user-password Adminpassword1! --backup-retention-period 0 --storage-type standard --port 3306 --publicly-accessible
+   ```
+   For the full arguments reference, please visit [here](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html?highlight=performance%20insights).
+
+### Working with RDS MySQL database instance
+
+1. Connecting to an RDS instance from linux shell
+   ```sh
+   mysql -h testmysqldbinstance.cj90nrslvzqi.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+   ```
+   To connect RDS instance from a linux server or from a local with the above command, we will need to invoke a permission to access the RDS instace to this source ip address.<br/>
+   We do this in AWS security group configuration for the security group attached to the RDS instance.
+2. Working with databases, tables within the RDS instance.<br/>
+   Above command will let us land on MySQL shell and we will be able to do sql queries to work with databases and tables there.<br/>
+   This is the same as what we covered above for on-premise MySQL server.<br/>
+
+Lets try out!
