@@ -5,6 +5,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
+<br/>
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
@@ -12,30 +13,36 @@
       <a href="#description">Description</a>
     </li>
     <li>
-      <a href="#working-with-mysql-server-in-linux-instance">Working with MySQL server in linux instance</a>
+      <a href="#working-with-mysql-server-in-ec2">Working with MySQL server in EC2</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#pre-requests">Pre requests</a></li>
+        <li><a href="#setup-mysql-server">Setup mysql server</a></li>
+        <li><a href="#configure-root-to-use-mysql-shell">Configure root to use MySQL shell</a></li>
+        <li><a href="#run-and-stop-mysql-service">Run and stop MySQL service</a></li>
+        <li><a href="#working-with-mysql-users-databses-and-tables-from-shell">Working with MySQL users, databses, and tables from shell</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li>
+      <a href="#working-with-aws-managed-rds">Working with AWS managed RDS</a>
+      <ul>
+        <li><a href="#pre-requests-and-environment-setup">Pre-requests and environment setup</a></li>
+        <li><a href="#create-a-rds-instance-using-aws-cli">Create a RDS instance using aws cli</a></li>
+        <li><a href="#working-with-mysql-database-in-rds-instances">Working with MySQL database in RDS instances</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
+<br/>
 
 ## Description
 
 Shows how to create and configure mysql server in a linux instance. <br/>
 It covers installing mysql server, configuring database and tables in an linux instance itself and accessing cloud managed mysql databases.
 
-## Working with MySQL server in linux instance
+## Working with MySQL server in EC2
 
 
-### Pre-configuration
+### Pre-requests
 
 1. Create and launch an EC2 instance in AWS console ([reference](https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LaunchInstanceWizard:))
 2. SSH login to the instance
@@ -106,7 +113,7 @@ It covers installing mysql server, configuring database and tables in an linux i
    ```
 
 
-### Running & Stopping MySQL service
+### Run and stop MySQL service
 
 1. Check the status
    ```sh
@@ -173,7 +180,7 @@ It covers installing mysql server, configuring database and tables in an linux i
    ```
 <br/>
 
-## Working with AWS managed RDS (Relational Database Service)
+## Working with AWS managed RDS
 
 ### Pre-requests and environment setup
 
@@ -189,14 +196,14 @@ It covers installing mysql server, configuring database and tables in an linux i
    <img src="https://i.imgur.com/DPpag3q.jpg"></img>
    Enter access key id and secret key, region where your RDS instance will be located, output format as json.<br/>
 
-### Create a RDS database instance using aws cli
+### Create a RDS instance using aws cli
 
    ```sh
    aws rds create-db-instance --engine mysql --engine-version 8.0.20 --db-instance-identifier testmysqldbinstance --allocated-storage 20 --db-instance-class db.t2.micro --master-username admin --master-user-password Adminpassword1! --backup-retention-period 0 --storage-type standard --port 3306 --publicly-accessible
    ```
    For the full arguments reference, please visit [here](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html?highlight=performance%20insights).
 
-### Working with RDS MySQL database instance
+### Working with MySQL database in RDS instances
 
 1. Connecting to an RDS instance from linux shell
    ```sh
