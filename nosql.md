@@ -1,7 +1,7 @@
 
 <br />
 <p align="center">
-  <h2 align="center">Working with NoSQL Database in Linux</h2>
+  <h2 align="center">Working with NoSQL (MongoDB & DynamoDB) Database in Linux</h2>
 </p>
 
 
