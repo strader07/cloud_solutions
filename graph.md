@@ -87,17 +87,18 @@ It covers installing Neo4j, configuring databases in a linux instance and access
    ```
    Expected output:
    <img src="https://i.imgur.com/AuyVcrk.jpg"></img>
-4. Start Neo4j
+2. Start Neo4j
    ```sh
    sudo systemctl start neo4j
    ```
-5. Stop noe4j
+3. Stop noe4j
    ```sh
    sudo systemctl stop neo4j
    ```
-6. Begin using Neo4j
+4. Start Neo4j console
    ```sh
-   sudo neo4j
+   # This only works when neoj4 is currently stopped.
+   sudo neo4j console
    ```
 
 
