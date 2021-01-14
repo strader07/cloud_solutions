@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <h3 align="center">Working with MySQL in Linux</h3>
+  <h2 align="center">Working with MySQL in Linux</h2>
 </p>
 
 ### Description
