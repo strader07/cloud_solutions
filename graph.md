@@ -100,6 +100,12 @@ It covers installing Neo4j, configuring databases in a linux instance and access
    # This only works when neoj4 is currently stopped.
    sudo neo4j console
    ```
+4. Edit Neo4j database configurations
+   ```sh
+   sudo nano /etc/neo4j/neo4j.conf
+   # after editing the configuration file, restart the service
+   sudo systemctl restart neo4j
+   ```
 
 
 ### Working with Neo4j from shell
