@@ -144,14 +144,14 @@ It covers installing mysql server, configuring database and tables in an linux i
    Note: replace 'new_user' and 'new_password' with your own
 3. Create a new database, a table, loading db and table info
    ```sql
-   CREATE DATABASE testdb; // creates a database named 'testdb'
-   SHOW DATABASES; // shows all the databases
-   USE testdb; // selects the database 'testdb' as the current database
-   SELECT DATABASE(); // shows which database is selected currently
+   CREATE DATABASE testdb; # creates a database named 'testdb'
+   SHOW DATABASES; # shows all the databases
+   USE testdb; # selects the database 'testdb' as the current database
+   SELECT DATABASE(); # shows which database is selected currently
    
-   CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE); // creates a table 'pets' within the selected db
-   SHOW TABLES; // shows tables in the current db
-   DESCRIBE pets; // shows table info
+   CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE); # creates a table 'pets' within the selected db
+   SHOW TABLES; # shows tables in the current db
+   DESCRIBE pets; # shows table info
    ```
 4. Granting a user permissions on MySQL
    ```sql
