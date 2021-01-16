@@ -10,7 +10,7 @@ if __name__=='__main__':
     scaler = StandardScaler()
     for file in input_files:
         raw = np.load(file)
-        # only transform feature columns
+        
         if 'y_' not in file:
             transformed = scaler.fit_transform(raw)
         if 'train' in file:
