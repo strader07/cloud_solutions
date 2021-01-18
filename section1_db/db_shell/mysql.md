@@ -167,6 +167,7 @@ It covers installing mysql server, configuring database and tables in an linux i
    SELECT DATABASE(); # shows which database is selected currently
    
    CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE); # creates a table 'pets' within the selected db
+   insert into pets (name, owner, species) values ('cat', 'Tony', 'animal'); # inserts a record in a table
    SHOW TABLES; # shows tables in the current db
    DESCRIBE pets; # shows table info
    ```
