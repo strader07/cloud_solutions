@@ -156,9 +156,7 @@ It covers installing mysql server, configuring database and tables in an linux i
    bind-address = 127.0.0.1
    ```
    to
-   ```
-   #bind-address = 127.0.0.1 or bind-address = 0.0.0.0
-   ```
+   ```#bind-address = 127.0.0.1``` or ```bind-address = 0.0.0.0```
 3. Create a new database, a table, loading db and table info
    ```sql
    CREATE DATABASE testdb; # creates a database named 'testdb'
