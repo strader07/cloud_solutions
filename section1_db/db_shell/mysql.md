@@ -168,6 +168,7 @@ It covers installing mysql server, configuring database and tables in an linux i
    insert into pets (name, owner, species) values ('cat', 'Tony', 'animal'); # inserts a record in a table
    SHOW TABLES; # shows tables in the current db
    DESCRIBE pets; # shows table info
+   select * from pets; # displays all the records in the table <pets>
    ```
 4. Granting a user permissions on MySQL
    ```sql
