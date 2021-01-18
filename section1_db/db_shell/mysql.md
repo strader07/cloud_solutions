@@ -141,7 +141,24 @@ It covers installing mysql server, configuring database and tables in an linux i
    ```sql
    CREATE USER 'new_user'@'localhost' IDENTIFIED BY 'new_password';
    ```
-   Note: replace 'new_user' and 'new_password' with your own
+   Note: replace 'new_user' and 'new_password' with your own.<br/>
+   If we want to allow a remote access to the server using this user, we can do it by the following command.
+   ```sql
+   GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'%' IDENTIFIED BY 'new_password' WITH GRANT OPTION;
+   FLUSH PRIVILEGES;
+   ```
+   And we need to go back to the linux shell and edit mysql configuration file as follows.
+   ```sh
+   sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+   ```
+   Change line
+   ```
+   bind-address = 127.0.0.1
+   ```
+   to
+   ```
+   #bind-address = 127.0.0.1 or bind-address = 0.0.0.0
+   ```
 3. Create a new database, a table, loading db and table info
    ```sql
    CREATE DATABASE testdb; # creates a database named 'testdb'
